@@ -1,0 +1,44 @@
+# FRONTEND
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vuejs-front-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: vuejs-front
+  template:
+    metadata:
+      labels:
+        app: vuejs-front
+    spec:
+      containers:
+      - name: vuejs-front
+        image: ramzibouzaiene/vuejs-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8082
+
+# BACKEND
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-back-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: springboot-back
+  template:
+    metadata:
+      labels:
+        app: springboot-back
+    spec:
+      containers:
+      - name: springboot-back
+        image: ramzibouzaiene/spring-boot-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
